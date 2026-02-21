@@ -20,7 +20,7 @@ Below are representative samples of the VLM's output using the structured prompt
 **Sample 1: True Negative (Correctly identified as Normal)**
 * **Index:** 61
 * **Ground Truth:** Normal
-* **CNN (MaxViT) Prediction:** Pneumonia (Failed)
+* **ViT (MaxViT) Prediction:** Pneumonia (Failed)
 * **VLM Generated Text:**
   > "1. **Lungs:** The lungs appear relatively clear, with no obvious consolidation or significant infiltrates. The lung markings are visible, suggesting adequate lung volume.
   > 2. **Heart:** The heart size appears within normal limits. The cardiomediastinal silhouette is unremarkable.
@@ -30,22 +30,22 @@ Below are representative samples of the VLM's output using the structured prompt
 **Sample 2: False Negative (Failed to identify Pneumonia)**
 * **Index:** 22
 * **Ground Truth:** Pneumonia
-* **CNN (MaxViT) Prediction:** Normal (Failed)
+* **ViT (MaxViT) Prediction:** Normal (Failed)
 * **VLM Generated Text:**
   > "1. **Lungs:** The lungs appear relatively clear, with no obvious consolidation or significant infiltrates. However, the image quality is poor, making a definitive assessment difficult. There is some haziness in the lower lung fields...
   > 2. **Heart:** The heart size appears within normal limits based on the limited view.
   > 3. **Pneumonia Opacities:** Given the poor image quality, it is difficult to definitively rule out pneumonia. There are no clear opacities that would strongly suggest pneumonia."
 
-## 4. Qualitative Analysis: VLM vs. Ground Truth vs. CNN
-To rigorously test the VLM, we evaluated it exclusively on a curated subset of 10 edge-case images that the **MaxViT CNN misclassified** in Task 1.
+## 4. Qualitative Analysis: VLM vs. Ground Truth vs. ViT
+To rigorously test the VLM, we evaluated it exclusively on a curated subset of 10 edge-case images that the **MaxViT ViT misclassified** in Task 1.
 
-* **Baseline VLM Performance (Lanczos Upscaling):** The VLM achieved a **30.0% accuracy** on these CNN failure cases. The qualitative outputs (like Sample 2 above) reveal *why* it failed: the model repeatedly noted that "the image quality is poor." Because the input was a blurry 28x28 image mathematically stretched to 224x224, the fine-grained infiltrates indicative of pneumonia were destroyed. Lacking clear evidence, the model safely defaulted to predicting "Normal."
-* **Enhanced VLM Performance (Swin2SR Upscaling):** When the Lanczos resampling was replaced with an AI Super-Resolution model (Swin Transformer V2), the VLM's accuracy on these exact same failure cases jumped to **60.0%**. The SR model sharpened anatomical boundaries, unlocking the VLM's clinical reasoning and allowing it to successfully correct 6 out of the 10 original CNN misclassifications.
+* **Baseline VLM Performance (Lanczos Upscaling):** The VLM achieved a **30.0% accuracy** on these ViT failure cases. The qualitative outputs (like Sample 2 above) reveal *why* it failed: the model repeatedly noted that "the image quality is poor." Because the input was a blurry 28x28 image mathematically stretched to 224x224, the fine-grained infiltrates indicative of pneumonia were destroyed. Lacking clear evidence, the model safely defaulted to predicting "Normal."
+* **Enhanced VLM Performance (Swin2SR Upscaling):** When the Lanczos resampling was replaced with an AI Super-Resolution model (Swin Transformer V2), the VLM's accuracy on these exact same failure cases jumped to **60.0%**. The SR model sharpened anatomical boundaries, unlocking the VLM's clinical reasoning and allowing it to successfully correct 6 out of the 10 original ViT misclassifications.
 
 ## 5. Strengths and Limitations
 **Strengths:**
-* **Second-Opinion Capability:** The VLM proved it can successfully override and correct a traditional CNN when provided with adequate visual fidelity.
-* **Explainability:** Unlike the CNN, which outputs a black-box probability score, the VLM provides a natural language rationale for its diagnosis, noting specifically when image quality limits its confidence.
+* **Second-Opinion Capability:** The VLM proved it can successfully override and correct a traditional ViT when provided with adequate visual fidelity.
+* **Explainability:** Unlike the ViT, which outputs a black-box probability score, the VLM provides a natural language rationale for its diagnosis, noting specifically when image quality limits its confidence.
 
 **Limitations:**
 * **Domain Shift Vulnerability:** MedGemma is trained on high-resolution, adult chest X-rays (e.g., MIMIC-CXR). Evaluating it on heavily downsampled pediatric MedMNIST images forces the model completely out of its training distribution, leading to heavy biases toward predicting "Normal."
