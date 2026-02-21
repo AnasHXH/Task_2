@@ -1,8 +1,0 @@
-1- Task_2:Vit_Misclassifications.ipynb
-https://colab.research.google.com/drive/1E6XgyDhKwA9nqsp0xtCBAdGGpAkbyL1a?usp=sharing 
-
-2- Task_2:Super_Resolution_Vit_Misclassifications.ipynb
-https://colab.research.google.com/drive/1xGRH-MWNgxhNhHMsoJLguLryF6mu9R7m?usp=sharing
-
-3- Task_2:Interactive_Professional_UI.ipynb
-https://colab.research.google.com/drive/1xd9MtUtmtykHAfqKeiPFkhqZKDI2xvCy?usp=sharing
