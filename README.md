@@ -16,6 +16,7 @@ This repository contains the implementation for Task 2 of the Postdoctoral Techn
 ### 2. MaxViT (Classification Baseline)
 * **Description:** Carried over from Task 1, MaxViT serves as our baseline.
 * **Role:** Instead of testing random images, we specifically extract the edge cases that MaxViT misclassified. By feeding these challenging images into the VLM, we perform a strict qualitative analysis comparing standard classification against multimodal AI reasoning.
+** Download the weight: [Google Drive Link](https://drive.google.com/file/d/1DFWhF_euBfmUaS-2XWgMnkZgsfxvvJc6/view?usp=sharing)
 
 ---
 ### 3. Swin2SR / SwinIR (AI Super-Resolution)
